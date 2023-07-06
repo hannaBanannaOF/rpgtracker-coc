@@ -1,0 +1,1394 @@
+{
+  "databaseChangeLog": [
+    {
+      "changeSet": {
+        "preConditions": [
+          {
+            "onFail": "MARK_RAN",
+            "not": [
+              {
+                "tableExists": {
+                  "tableName": "pulp_talents"
+                }
+              }
+            ]
+          }
+        ],
+        "id": "202209031537",
+        "author": "HannaBananna",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "pulp_talents",
+              "columns": [
+                {
+                  "column": {
+                    "name": "id",
+                    "type": "uuid",
+                    "constraints": {
+                      "primaryKey": true,
+                      "nullable": false
+                    },
+                    "defaultValueComputed": "gen_random_uuid()"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "name",
+                    "type": "varchar(50)",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "description",
+                    "type": "text",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "create_date",
+                    "type": "timestamp",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueDate": "current_timestamp"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "update_date",
+                    "type": "timestamp",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueDate": "current_timestamp"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "changeSet": {
+        "preConditions": [
+          {
+            "onFail": "MARK_RAN",
+            "not": [
+              {
+                "tableExists": {
+                  "tableName": "session"
+                }
+              }
+            ]
+          }
+        ],
+        "id": "202211111145",
+        "author": "HannaBananna",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "session",
+              "columns": [
+                {
+                  "column": {
+                    "name": "id",
+                    "type": "uuid",
+                    "constraints": {
+                      "primaryKey": true,
+                      "nullable": false
+                    },
+                    "defaultValueComputed": "gen_random_uuid()"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "pulp_cthulhu",
+                    "type": "boolean",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueBoolean":false
+                  }
+                },
+                {
+                  "column": {
+                    "name": "core_session_id",
+                    "type": "uuid",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "create_date",
+                    "type": "timestamp",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueDate": "current_timestamp"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "update_date",
+                    "type": "timestamp",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueDate": "current_timestamp"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "changeSet" : {
+        "preConditions": [
+          {
+            "onFail": "MARK_RAN",
+            "not": [
+              {
+                "tableExists": {
+                  "tableName": "occupation"
+                }
+              }
+            ]
+          }
+        ],
+        "id": "202212161944",
+        "author": "HannaBananna",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "occupation",
+              "columns": [
+                {
+                  "column": {
+                    "name": "id",
+                    "type": "uuid",
+                    "constraints": {
+                      "primaryKey": true,
+                      "nullable": false
+                    },
+                    "defaultValueComputed": "gen_random_uuid()"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "name",
+                    "type": "varchar(50)",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "description",
+                    "type": "text",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "skill_points_calculation_rule",
+                    "type": "varchar(45)",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "minimum_credit_rating",
+                    "type": "integer",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "maximum_credit_rating",
+                    "type": "integer",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "suggested_contacts",
+                    "type": "text"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "epoch_personal_skill_choices",
+                    "type": "integer"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "typed_skill_choices",
+                    "type": "integer"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "typed_skill_choices_kind",
+                    "type": "varchar(45)"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "create_date",
+                    "type": "timestamp",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueDate": "current_timestamp"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "update_date",
+                    "type": "timestamp",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueDate": "current_timestamp"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "changeSet": {
+        "preConditions": [
+          {
+            "onFail": "MARK_RAN",
+            "not": [
+              {
+                "tableExists": {
+                  "tableName": "character_sheet"
+                }
+              }
+            ]
+          }
+        ],
+        "id": "202211111447",
+        "author": "HannaBananna",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "character_sheet",
+              "columns": [
+                {
+                  "column": {
+                    "name": "id",
+                    "type": "uuid",
+                    "constraints": {
+                      "primaryKey": true,
+                      "nullable": false
+                    },
+                    "defaultValueComputed": "gen_random_uuid()"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "pulp_cthulhu",
+                    "type": "boolean",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueBoolean":false
+                  }
+                },
+                {
+                  "column": {
+                    "name": "core_character_sheet_id",
+                    "type": "uuid",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "age",
+                    "type": "integer",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "sex",
+                    "type": "varchar(50)"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "birthplace",
+                    "type": "varchar(100)"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "residence",
+                    "type": "varchar(100)"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "strength",
+                    "type": "integer",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "constitution",
+                    "type": "integer",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "size",
+                    "type": "integer",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "dexterity",
+                    "type": "integer",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "appearance",
+                    "type": "integer",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "intelligence",
+                    "type": "integer",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "power",
+                    "type": "integer",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "education",
+                    "type": "integer",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "luck",
+                    "type": "integer",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "move_rate",
+                    "type": "integer",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "health_points",
+                    "type": "integer",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "magic_points",
+                    "type": "integer",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "sanity",
+                    "type": "integer",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "starting_sanity",
+                    "type": "integer",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "maximum_health_points",
+                    "type": "integer",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "maximum_magic_points",
+                    "type": "integer",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "maximum_sanity",
+                    "type": "integer",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "build",
+                    "type": "integer",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "bonus_damage",
+                    "type": "varchar(10)",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "dodge",
+                    "type": "integer",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "dodge_improvement_check",
+                    "type": "boolean",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueBoolean":false
+                  }
+                },
+                {
+                  "column": {
+                    "name": "language_own",
+                    "type": "integer",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "language_own_improvement_check",
+                    "type": "boolean",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueBoolean":false
+                  }
+                },
+                {
+                  "column": {
+                    "name": "occupational_skill_points",
+                    "type": "integer",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "personal_interest_skill_points",
+                    "type": "integer",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "major_wounds",
+                    "type": "boolean",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueBoolean":false
+                  }
+                },
+                {
+                  "column": {
+                    "name": "temporary_insanity",
+                    "type": "boolean",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueBoolean":false
+                  }
+                },
+                {
+                  "column": {
+                    "name": "indefinite_insanity",
+                    "type": "boolean",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueBoolean":false
+                  }
+                },
+                {
+                  "column": {
+                    "name": "credit_rating",
+                    "type": "integer",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "cthulhu_mythos",
+                    "type": "integer",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "occupation_id",
+                    "type": "uuid",
+                    "constraints": {
+                      "foreignKeyName": "fk_character_sheet_occupation",
+                      "references": "occupation(id)"
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "pulp_archetype",
+                    "type": "varchar(50)"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "create_date",
+                    "type": "timestamp",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueDate": "current_timestamp"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "update_date",
+                    "type": "timestamp",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueDate": "current_timestamp"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "changeSet" : {
+        "preConditions": [
+          {
+            "onFail": "MARK_RAN",
+            "not": [
+              {
+                "tableExists": {
+                  "tableName": "skills"
+                }
+              }
+            ]
+          }
+        ],
+        "id": "202212091729",
+        "author": "HannaBananna",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "skills",
+              "columns": [
+                {
+                  "column": {
+                    "name": "id",
+                    "type": "uuid",
+                    "constraints": {
+                      "primaryKey": true,
+                      "nullable": false
+                    },
+                    "defaultValueComputed": "gen_random_uuid()"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "name",
+                    "type": "varchar(50)",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "base_value",
+                    "type": "integer"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "skill_rarity",
+                    "type": "varchar(45)",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "skill_kind",
+                    "type": "varchar(45)",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "parent_id",
+                    "type": "uuid",
+                    "constraints": {
+                      "foreignKeyName": "fk_parent_skill",
+                      "references": "skills(id)"
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "usable",
+                    "type": "boolean",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueBoolean":true
+                  }
+                },
+                {
+                  "column": {
+                    "name": "create_date",
+                    "type": "timestamp",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueDate": "current_timestamp"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "update_date",
+                    "type": "timestamp",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueDate": "current_timestamp"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "changeSet" : {
+        "preConditions": [
+          {
+            "onFail": "MARK_RAN",
+            "not": [
+              {
+                "tableExists": {
+                  "tableName": "occupation_skills"
+                }
+              }
+            ]
+          },
+          {
+            "tableExists": {
+              "tableName": "occupation"
+            }
+          },
+          {
+            "tableExists": {
+              "tableName": "skills"
+            }
+          }
+        ],
+        "id": "202212161953",
+        "author": "HannaBananna",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "occupation_skills",
+              "columns": [
+                {
+                  "column": {
+                    "name": "occupation_id",
+                    "type": "uuid",
+                    "constraints": {
+                      "primaryKey": true,
+                      "foreignKeyName": "fk_occupation_skills_occupation",
+                      "references": "occupation(id)",
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "skill_id",
+                    "type": "uuid",
+                    "constraints": {
+                      "primaryKey": true,
+                      "foreignKeyName": "fk_occupation_skills_skill",
+                      "references": "skills(id)",
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "create_date",
+                    "type": "timestamp",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueDate": "current_timestamp"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "update_date",
+                    "type": "timestamp",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueDate": "current_timestamp"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "changeSet" : {
+        "preConditions": [
+          {
+            "onFail": "MARK_RAN",
+            "not": [
+              {
+                "tableExists": {
+                  "tableName": "pulp_talents_character_sheet"
+                }
+              }
+            ]
+          },
+          {
+            "tableExists": {
+              "tableName": "pulp_talents"
+            }
+          },
+          {
+            "tableExists": {
+              "tableName": "character_sheet"
+            }
+          }
+        ],
+        "id": "202212161956",
+        "author": "HannaBananna",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "pulp_talents_character_sheet",
+              "columns": [
+                {
+                  "column": {
+                    "name": "pulp_talent_id",
+                    "type": "uuid",
+                    "constraints": {
+                      "primaryKey": true,
+                      "foreignKeyName": "fk_pulp_talents_character_sheet_pulp_talents",
+                      "references": "pulp_talents(id)",
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "character_sheet_id",
+                    "type": "uuid",
+                    "constraints": {
+                      "primaryKey": true,
+                      "foreignKeyName": "fk_pulp_talents_character_sheet_character_sheet",
+                      "references": "character_sheet(id)",
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "create_date",
+                    "type": "timestamp",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueDate": "current_timestamp"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "update_date",
+                    "type": "timestamp",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueDate": "current_timestamp"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "changeSet" : {
+        "preConditions": [
+          {
+            "onFail": "MARK_RAN",
+            "not": [
+              {
+                "tableExists": {
+                  "tableName": "ammo"
+                }
+              }
+            ]
+          }
+        ],
+        "id": "202212231105",
+        "author": "HannaBananna",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "ammo",
+              "columns": [
+                {
+                  "column": {
+                    "name": "id",
+                    "type": "uuid",
+                    "constraints": {
+                      "primaryKey": true,
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "name",
+                    "type": "varchar(50)",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "rounds_shot_with_each",
+                    "type": "integer",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueNumeric": 1
+                  }
+                },
+                {
+                  "column": {
+                    "name": "create_date",
+                    "type": "timestamp",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueDate": "current_timestamp"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "update_date",
+                    "type": "timestamp",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueDate": "current_timestamp"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "changeSet" : {
+        "preConditions": [
+          {
+            "onFail": "MARK_RAN",
+            "not": [
+              {
+                "tableExists": {
+                  "tableName": "weapon"
+                }
+              }
+            ]
+          },
+          {
+            "tableExists": {
+              "tableName": "ammo"
+            }
+          },
+          {
+            "tableExists": {
+              "tableName": "skills"
+            }
+          }
+        ],
+        "id": "202212231400",
+        "author": "HannaBananna",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "weapon",
+              "columns": [
+                {
+                  "column": {
+                    "name": "id",
+                    "type": "uuid",
+                    "constraints": {
+                      "primaryKey": true,
+                      "nullable": false
+                    },
+                    "defaultValueComputed": "gen_random_uuid()"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "name",
+                    "type": "varchar(50)",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "range",
+                    "type": "varchar(20)"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "damage",
+                    "type": "varchar(20)",
+                    "constraints": {
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "attacks_per_round",
+                    "type": "integer",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueNumeric": 1
+                  }
+                },
+                {
+                  "column": {
+                    "name": "malfunction",
+                    "type": "integer"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "is_melee",
+                    "type": "boolean",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueBoolean":false
+                  }
+                },
+                {
+                  "column": {
+                    "name": "is_throwable",
+                    "type": "boolean",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueBoolean":false
+                  }
+                },
+                {
+                  "column": {
+                    "name": "is_dual_wield",
+                    "type": "boolean",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueBoolean":false
+                  }
+                },
+                {
+                  "column": {
+                    "name": "ammo_id",
+                    "type": "uuid",
+                    "constraints": {
+                      "foreignKeyName": "fk_weapon_ammo",
+                      "references": "ammo(id)"
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "skill_id",
+                    "type": "uuid",
+                    "constraints": {
+                      "foreignKeyName": "fk_weapon_skill",
+                      "references": "skills(id)",
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "create_date",
+                    "type": "timestamp",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueDate": "current_timestamp"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "update_date",
+                    "type": "timestamp",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueDate": "current_timestamp"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "changeSet" : {
+        "preConditions": [
+          {
+            "onFail": "MARK_RAN",
+            "not": [
+              {
+                "tableExists": {
+                  "tableName": "skills_character_sheet"
+                }
+              }
+            ]
+          },
+          {
+            "tableExists": {
+              "tableName": "skills"
+            }
+          },
+          {
+            "tableExists": {
+              "tableName": "character_sheet"
+            }
+          }
+        ],
+        "id": "202212231610",
+        "author": "HannaBananna",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "skills_character_sheet",
+              "columns": [
+                {
+                  "column": {
+                    "name": "skill_id",
+                    "type": "uuid",
+                    "constraints": {
+                      "primaryKey": true,
+                      "foreignKeyName": "fk_skills_character_sheet_skills",
+                      "references": "skills(id)",
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "character_sheet_id",
+                    "type": "uuid",
+                    "constraints": {
+                      "primaryKey": true,
+                      "foreignKeyName": "fk_skills_character_sheet_character_sheet",
+                      "references": "character_sheet(id)",
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "value",
+                    "type": "integer",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueNumeric": 1
+                  }
+                },
+                {
+                  "column": {
+                    "name": "improvement_check",
+                    "type": "boolean",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueBoolean":false
+                  }
+                },
+                {
+                  "column": {
+                    "name": "create_date",
+                    "type": "timestamp",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueDate": "current_timestamp"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "update_date",
+                    "type": "timestamp",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueDate": "current_timestamp"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "changeSet" : {
+        "preConditions": [
+          {
+            "onFail": "MARK_RAN",
+            "not": [
+              {
+                "tableExists": {
+                  "tableName": "weapon_character_sheet"
+                }
+              }
+            ]
+          },
+          {
+            "tableExists": {
+              "tableName": "weapon"
+            }
+          },
+          {
+            "tableExists": {
+              "tableName": "character_sheet"
+            }
+          }
+        ],
+        "id": "202212251124",
+        "author": "HannaBananna",
+        "changes": [
+          {
+            "createTable": {
+              "tableName": "weapon_character_sheet",
+              "columns": [
+                {
+                  "column": {
+                    "name": "weapon_id",
+                    "type": "uuid",
+                    "constraints": {
+                      "primaryKey": true,
+                      "foreignKeyName": "fk_weapon_character_sheet_weapon",
+                      "references": "weapon(id)",
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "character_sheet_id",
+                    "type": "uuid",
+                    "constraints": {
+                      "primaryKey": true,
+                      "foreignKeyName": "fk_weapon_character_sheet_character_sheet",
+                      "references": "character_sheet(id)",
+                      "nullable": false
+                    }
+                  }
+                },
+                {
+                  "column": {
+                    "name": "ammo_left",
+                    "type": "integer"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "rounds_left",
+                    "type": "integer"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "quantity_carry",
+                    "type": "integer",
+                    "defaultValueNumeric": 1
+                  }
+                },
+                {
+                  "column": {
+                    "name": "nickname",
+                    "type": "varchar(50)"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "create_date",
+                    "type": "timestamp",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueDate": "current_timestamp"
+                  }
+                },
+                {
+                  "column": {
+                    "name": "update_date",
+                    "type": "timestamp",
+                    "constraints": {
+                      "nullable": false
+                    },
+                    "defaultValueDate": "current_timestamp"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
