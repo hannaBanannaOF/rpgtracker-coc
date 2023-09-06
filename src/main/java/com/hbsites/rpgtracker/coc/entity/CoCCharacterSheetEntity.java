@@ -1,8 +1,6 @@
 package com.hbsites.rpgtracker.coc.entity;
 
-import com.hbsites.hbsitescommons.dto.CharacterSheetBasicInfoDTO;
 import com.hbsites.hbsitescommons.dto.CharacterSheetListingDTO;
-import com.hbsites.hbsitescommons.entity.BaseEntity;
 import com.hbsites.hbsitescommons.entity.RabbitBaseEntity;
 import com.hbsites.hbsitescommons.interfaces.EventProducerInterface;
 import com.hbsites.rpgtracker.coc.dto.CoCCharacterSheetDTO;
@@ -17,7 +15,6 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 import lombok.Data;
 import org.apache.commons.lang3.NotImplementedException;
 
@@ -29,7 +26,7 @@ import java.util.stream.Collectors;
 @Data
 @Entity
 @Table(name = "character_sheet")
-public class CoCCharacterSheetEntity extends RabbitBaseEntity<CharacterSheetListingDTO<CoCSessionEntity>, CoCCharacterSheetDTO, List<CharacterSheetBasicInfoDTO>> {
+public class CoCCharacterSheetEntity extends RabbitBaseEntity<CharacterSheetListingDTO<CoCSessionEntity>, CoCCharacterSheetDTO> {
 
     @Column(name = "id", columnDefinition = "uuid")
     @Id
@@ -171,7 +168,7 @@ public class CoCCharacterSheetEntity extends RabbitBaseEntity<CharacterSheetList
     @Override
     public CoCCharacterSheetDTO toDetailDTO() {
         CoCCharacterSheetDTO dto = new CoCCharacterSheetDTO(this.getId(), this.getCoreCharacterSheetId(),
-                new CoCCharacterSheetDTO.CoCCharacterSheetBasicInfoDTO("", this.getPulpCthulhu(), this.getAge(),
+                new CoCCharacterSheetDTO.CoCCharacterSheetBasicInfoDTO(this.getPulpCthulhu(), this.getAge(),
                         this.getSex(), this.getBirthplace(), this.getResidence(), this.getPulpArchetype()),
                 new CoCCharacterSheetDTO.CoCCharacterSheetBasicAttributesDTO(this.getStrength(), this.getConstitution(), this.getSize(),
                         this.getDexterity(), this.getAppearance(), this.getIntelligence(), this.getPower(), this.getEducation(), this.getLuck()),
@@ -187,20 +184,13 @@ public class CoCCharacterSheetEntity extends RabbitBaseEntity<CharacterSheetList
     }
 
     @Override
-    public CharacterSheetListingDTO<CoCSessionEntity> toListDTO(EventProducerInterface<List<CharacterSheetBasicInfoDTO>> template) {
+    public CharacterSheetListingDTO<CoCSessionEntity> toListDTO(EventProducerInterface template) {
         throw new NotImplementedException();
     }
 
     @Override
-    public CoCCharacterSheetDTO toDetailDTO(EventProducerInterface<List<CharacterSheetBasicInfoDTO>> template) {
-        CoCCharacterSheetDTO dto = toDetailDTO();
-        CharacterSheetBasicInfoDTO info = template.getFromRabbitMQ(List.of(getCoreCharacterSheetId())).stream().findFirst().orElse(new CharacterSheetBasicInfoDTO());
-        if (info.getPlayer() != null) {
-            dto.getBasicInfo().setPlayerName(info.getPlayer().getDisplayName());
-        }
-        if (info.getCharacterName() != null) {
-            dto.getBasicInfo().setCharacterName(info.getCharacterName());
-        }
-        return dto;
+    public CoCCharacterSheetDTO toDetailDTO(EventProducerInterface template) {
+        template.getFromRabbitMQ(List.of(getCoreCharacterSheetId()), null, this.getId());
+        return toDetailDTO();
     }
 }

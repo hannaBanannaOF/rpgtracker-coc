@@ -26,9 +26,10 @@ public class ResourceServerConfig {
     public DefaultSecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.cors(AbstractHttpConfigurer::disable).
                 authorizeHttpRequests(authz -> {
-                    authz.requestMatchers("/**").hasRole("RPGTRACKER_USER");
-//                    authz.requestMatchers("/**").permitAll();
-                })
+                    authz.requestMatchers("/coc/ws/**").permitAll();
+                    authz.requestMatchers("/coc/api/**").hasRole("RPGTRACKER_USER");
+                }).
+                csrf(csrf -> csrf.ignoringRequestMatchers("coc/ws/**"))
                 .oauth2ResourceServer(oauth ->
                         oauth.jwt(jwt ->
                                 jwt.jwtAuthenticationConverter(keycloakJwtAuthenticationConverter())

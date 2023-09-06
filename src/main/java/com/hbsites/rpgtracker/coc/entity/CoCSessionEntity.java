@@ -24,7 +24,7 @@ import java.util.UUID;
 @Data
 @Entity
 @Table(name = "session")
-public class CoCSessionEntity extends RabbitBaseEntity<CoCSessionDTO, CoCSessionDTO, List<SessionBasicInfoDTO>> {
+public class CoCSessionEntity extends RabbitBaseEntity<CoCSessionDTO, CoCSessionDTO> {
 
     @Column(name = "id", columnDefinition = "uuid")
     @Id
@@ -38,6 +38,22 @@ public class CoCSessionEntity extends RabbitBaseEntity<CoCSessionDTO, CoCSession
     private Boolean pulpCthulhu;
 
     @Override
+    public CoCSessionDTO toListDTO(EventProducerInterface template) {
+        template.getFromRabbitMQ(List.of(this.getCoreSessionId()), this.getId(), null);
+        CoCSessionDTO dto = new CoCSessionDTO(this.getPulpCthulhu(), this.getCoreSessionId());
+        dto.populate(this.getId(), null, ETRPGSystem.CALL_OF_CTHULHU, false, null);
+        return dto;
+    }
+
+    @Override
+    public CoCSessionDTO toDetailDTO(EventProducerInterface template) {
+        template.getFromRabbitMQ(List.of(this.getCoreSessionId()), this.getId(), null);
+        CoCSessionDTO dto = new CoCSessionDTO(this.getPulpCthulhu(), this.getCoreSessionId());
+        dto.populate(this.getId(), null, ETRPGSystem.CALL_OF_CTHULHU, false, null);
+        return dto;
+    }
+
+    @Override
     public CoCSessionDTO toListDTO() {
         throw new NotImplementedException();
     }
@@ -45,21 +61,5 @@ public class CoCSessionEntity extends RabbitBaseEntity<CoCSessionDTO, CoCSession
     @Override
     public CoCSessionDTO toDetailDTO() {
         throw new NotImplementedException();
-    }
-
-    @Override
-    public CoCSessionDTO toListDTO(EventProducerInterface<List<SessionBasicInfoDTO>> template) {
-        CoCSessionDTO dto = new CoCSessionDTO(this.getPulpCthulhu(), this.getCoreSessionId(),null);
-        SessionBasicInfoDTO info = template.getFromRabbitMQ(List.of(this.getCoreSessionId())).stream().findFirst().orElse(new SessionBasicInfoDTO());
-        dto.populate(this.getId(), info.getSessionName(), ETRPGSystem.CALL_OF_CTHULHU, info.isInPlay(), new ArrayList<>());
-        return dto;
-    }
-
-    @Override
-    public CoCSessionDTO toDetailDTO(EventProducerInterface<List<SessionBasicInfoDTO>> template) {
-        SessionBasicInfoDTO info = template.getFromRabbitMQ(List.of(this.getCoreSessionId())).stream().findFirst().orElse(new SessionBasicInfoDTO());
-        CoCSessionDTO dto = new CoCSessionDTO(this.getPulpCthulhu(), this.getCoreSessionId(),info.getSessionSheets());
-        dto.populate(this.getId(), info.getSessionName(), ETRPGSystem.CALL_OF_CTHULHU, info.isInPlay(), new ArrayList<>());
-        return dto;
     }
 }

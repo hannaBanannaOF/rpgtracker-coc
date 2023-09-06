@@ -45,10 +45,12 @@ public class CoCOccupationService implements CRUDService<UUID, CoCOccupationList
         e.setTypedSkillChoices(dto.getTypedSkillChoices());
         e.setTypedSkillChoicesKind(dto.getTypedSkillChoicesKind());
         e.setSkillPointCalculationRule(dto.getSkillPointCalculationRule());
-        for (UUID id : dto.getSkills()) {
-            CoCSkillEntity skill = skillRepository.findById(id).orElse(null);
-            if (skill != null) {
-                e.getSkills().add(skill);
+        if (dto.getSkills() != null) {
+            for (UUID id : dto.getSkills()) {
+                CoCSkillEntity skill = skillRepository.findById(id).orElse(null);
+                if (skill != null) {
+                    e.getSkills().add(skill);
+                }
             }
         }
         e = repository.save(e);

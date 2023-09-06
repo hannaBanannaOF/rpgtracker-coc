@@ -62,7 +62,7 @@ public class CoCOccupationEntity extends BaseEntity<CoCOccupationListingDTO, CoC
     private ESkillKind typedSkillChoicesKind;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "occupation_skills_coc",
+    @JoinTable(name = "occupation_skills",
             joinColumns = @JoinColumn(name = "occupation_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "skill_id", referencedColumnName = "id"))
     private List<CoCSkillEntity> skills = new ArrayList<>();

@@ -1,5 +1,6 @@
 package com.hbsites.rpgtracker.coc.controller;
 
+import com.hbsites.hbsitescommons.config.ApiVersion;
 import com.hbsites.hbsitescommons.interfaces.CRUDRestController;
 import com.hbsites.rpgtracker.coc.dto.CoCWeaponCreateDTO;
 import com.hbsites.rpgtracker.coc.dto.CoCWeaponDetailDTO;
@@ -15,6 +16,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/weapons")
+@ApiVersion(1)
 public class CoCWeaponRestController implements CRUDRestController<CoCWeaponListDTO, CoCWeaponDetailDTO, UUID, CoCWeaponCreateDTO> {
 
     @Lazy

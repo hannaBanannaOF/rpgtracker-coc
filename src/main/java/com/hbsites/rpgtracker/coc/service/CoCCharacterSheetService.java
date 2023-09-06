@@ -1,7 +1,5 @@
 package com.hbsites.rpgtracker.coc.service;
 
-import com.hbsites.hbsitescommons.dto.CharacterSheetBasicInfoDTO;
-import com.hbsites.hbsitescommons.dto.CharacterSheetListingDTO;
 import com.hbsites.rpgtracker.coc.dto.CoCCharacterSheetDTO;
 import com.hbsites.rpgtracker.coc.dto.CoCCharacterSheetSkillDTO;
 import com.hbsites.rpgtracker.coc.entity.CoCCharacterSheetEntity;

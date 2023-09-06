@@ -24,7 +24,7 @@ public class CoCCharacterSheetDTO {
     @RequiredArgsConstructor
     @Data
     public static class CoCCharacterSheetBasicInfoDTO {
-        private @NonNull String characterName;
+        private String characterName;
         private String playerName;
         private @NonNull Boolean pulpCthulhu;
         private @NonNull Integer age;

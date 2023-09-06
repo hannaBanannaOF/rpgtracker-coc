@@ -18,7 +18,6 @@ import java.util.UUID;
 public class CoCSessionDTO extends SessionListingDTO<CoCSessionEntity> {
     private Boolean pulpCthulhu;
     private UUID coreId;
-    private List<SessionSheetDTO> characterSheets;
 
     @Override
     public CoCSessionEntity toEntity() {
