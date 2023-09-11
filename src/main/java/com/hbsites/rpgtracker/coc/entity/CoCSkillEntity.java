@@ -71,6 +71,6 @@ public class CoCSkillEntity extends BaseEntity<CoCSkillDTO, CoCSkillDetailDTO> {
 
     @Override
     public CoCSkillDetailDTO toDetailDTO() {
-        return new CoCSkillDetailDTO(this.id, this.rarity, this.kind, this.usable, this.baseValue, this.name, this.parentSkill != null ? this.parentSkill.toDetailDTO() : null);
+        return new CoCSkillDetailDTO(this.id, this.rarity, this.kind, this.usable, this.baseValue, this.name, this.parentSkill != null ? this.parentSkill.getId() : null);
     }
 }

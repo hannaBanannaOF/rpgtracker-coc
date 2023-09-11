@@ -6,6 +6,7 @@ import com.hbsites.rpgtracker.coc.dto.CoCSessionDTO;
 import com.hbsites.rpgtracker.coc.service.CoCSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,8 +22,8 @@ public class CoCSessionRestController implements CRUDRestController<CoCSessionDT
     private CoCSessionService sessionService;
 
     @Override
-    public List<CoCSessionDTO> getAll() {
-        return sessionService.getAll();
+    public Page<CoCSessionDTO> getAll(int page) {
+        return sessionService.getAll(page);
     }
 
     @Override

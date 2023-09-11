@@ -10,16 +10,18 @@ import com.hbsites.rpgtracker.coc.repository.CoCOccupationRepository;
 import com.hbsites.rpgtracker.coc.repository.CoCSkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
-public class CoCOccupationService implements CRUDService<UUID, CoCOccupationListingDTO, CoCOccupationCreateDTO, CoCOccupationDetailDTO> {
+public class CoCOccupationService implements CRUDService<UUID, CoCOccupationListingDTO, CoCOccupationDetailDTO, CoCOccupationDetailDTO> {
     @Autowired
     @Lazy
     private CoCOccupationRepository repository;
@@ -29,12 +31,15 @@ public class CoCOccupationService implements CRUDService<UUID, CoCOccupationList
     private CoCSkillRepository skillRepository;
 
     @Override
-    public List<CoCOccupationListingDTO> getAll() {
-        return repository.findAll().stream().map(CoCOccupationEntity::toListDTO).collect(Collectors.toList());
+    public Page<CoCOccupationListingDTO> getAll(int page) {
+        PageRequest pageRequest = PageRequest.of(
+                page,
+                20);
+        return repository.findAll(pageRequest).map(CoCOccupationEntity::toListDTO);
     }
 
     @Override
-    public CoCOccupationDetailDTO create(CoCOccupationCreateDTO dto) {
+    public CoCOccupationDetailDTO create(CoCOccupationDetailDTO dto) {
         CoCOccupationEntity e = new CoCOccupationEntity();
         e.setName(dto.getName());
         e.setDescription(dto.getDescription());
@@ -68,7 +73,7 @@ public class CoCOccupationService implements CRUDService<UUID, CoCOccupationList
     }
 
     @Override
-    public CoCOccupationDetailDTO update(UUID id, CoCOccupationCreateDTO payload) {
+    public CoCOccupationDetailDTO update(UUID id, CoCOccupationDetailDTO payload) {
         CoCOccupationEntity e = findEntityOrElseThrow(id);
         e.setName(payload.getName());
         e.setDescription(payload.getDescription());
@@ -82,10 +87,12 @@ public class CoCOccupationService implements CRUDService<UUID, CoCOccupationList
         if (e.getSkills() != null) {
             e.getSkills().clear();
         }
-        for (UUID skillid : payload.getSkills()) {
-            CoCSkillEntity skill = skillRepository.findById(skillid).orElse(null);
-            if (skill != null) {
-                e.getSkills().add(skill);
+        if (payload.getSkills() != null) {
+            for (UUID skillid : payload.getSkills()) {
+                CoCSkillEntity skill = skillRepository.findById(skillid).orElse(null);
+                if (skill != null) {
+                    e.getSkills().add(skill);
+                }
             }
         }
         e = repository.save(e);

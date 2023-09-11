@@ -65,7 +65,7 @@ public class CoCWeaponEntity extends BaseEntity<CoCWeaponListDTO, CoCWeaponDetai
     @Override
     public CoCWeaponDetailDTO toDetailDTO() {
         return new CoCWeaponDetailDTO(this.id, this.name, this.range, this.damage, this.attacksPerRound, this.malfunction,
-                this.isMelee, this.isThrowable, this.isDualWield, this.ammo != null ? this.ammo.toDetailDTO() : null,
-                this.skillUsed != null ? this.skillUsed.toDetailDTO() : null);
+                this.isMelee, this.isThrowable, this.isDualWield, this.ammo != null ? this.ammo.getId() : null,
+                this.skillUsed != null ? this.skillUsed.getId() : null);
     }
 }

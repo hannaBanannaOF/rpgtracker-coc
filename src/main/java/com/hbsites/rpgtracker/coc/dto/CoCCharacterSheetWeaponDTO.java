@@ -12,4 +12,5 @@ public class CoCCharacterSheetWeaponDTO {
     private Integer quantityCarry;
     private String nickname;
     private Integer totalAmmoLeft;
+    private Integer successValue;
 }

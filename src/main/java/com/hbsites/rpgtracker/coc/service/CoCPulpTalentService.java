@@ -6,6 +6,10 @@ import com.hbsites.rpgtracker.coc.entity.CoCPulpTalentEntity;
 import com.hbsites.rpgtracker.coc.repository.CoCPulpTalentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
@@ -22,9 +26,12 @@ public class CoCPulpTalentService implements CRUDService<UUID, CoCPulpTalentDTO,
     private CoCPulpTalentRepository repository;
 
     @Override
-    public List<CoCPulpTalentDTO> getAll() {
-        return repository.findAll().stream().map(CoCPulpTalentEntity::toListDTO)
-                .collect(Collectors.toList());
+    public Page<CoCPulpTalentDTO> getAll(int page) {
+        PageRequest pageRequest = PageRequest.of(
+                page,
+                20,
+                Sort.by("name"));
+        return repository.findAll(pageRequest).map(CoCPulpTalentEntity::toListDTO);
     }
 
     @Override

@@ -2,6 +2,8 @@ package com.hbsites.rpgtracker.coc.service;
 
 import com.hbsites.rpgtracker.coc.dto.CoCCharacterSheetDTO;
 import com.hbsites.rpgtracker.coc.dto.CoCCharacterSheetSkillDTO;
+import com.hbsites.rpgtracker.coc.dto.CoCCharacterSheetWeaponDTO;
+import com.hbsites.rpgtracker.coc.dto.CoCWeaponDetailDTO;
 import com.hbsites.rpgtracker.coc.entity.CoCCharacterSheetEntity;
 import com.hbsites.rpgtracker.coc.entity.CoCCharacterSheetSkillEntity;
 import com.hbsites.rpgtracker.coc.entity.CoCSkillEntity;
@@ -10,6 +12,8 @@ import com.hbsites.rpgtracker.coc.repository.CoCCharacterSheetRepository;
 import com.hbsites.rpgtracker.coc.repository.CoCSkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -37,7 +41,7 @@ public class CoCCharacterSheetService {
         CoCCharacterSheetEntity e = findOneOrElseThrow(coreId);
         CoCCharacterSheetDTO dto = e.toDetailDTO(characterSheetBasicInfoRequestProducer);
 
-        List<CoCSkillEntity> usableSkills = skillRepository.findAllByUsableTrue();
+        List<CoCSkillEntity> usableSkills = skillRepository.findAllByUsableTrue(Pageable.unpaged()).stream().toList();
 
         // Popular lista de skills
         for (CoCSkillEntity skill: usableSkills) {
@@ -45,7 +49,7 @@ public class CoCCharacterSheetService {
             CoCCharacterSheetSkillEntity skillOnSheet = e.getSkills().stream().filter(skillSheet -> skillSheet.getSkill().getId().equals(skillDto.getSkillID())).reduce((a, b) -> {
                 throw new IllegalStateException("Multiple elements!");
             }).orElse(null);
-            if (skillOnSheet != null) {
+            if (skillOnSheet != null && skillOnSheet.getValue() != null) {
                 skillDto.setValue(skillOnSheet.getValue());
                 skillDto.setImprovementCheck(skillOnSheet.getImprovementCheck());
             }
@@ -59,6 +63,13 @@ public class CoCCharacterSheetService {
 
         dto.getSkills().sort(Comparator.comparing(CoCCharacterSheetSkillDTO::getSkillName));
 
+        // Calcular sucesso das armas
+        for (CoCCharacterSheetWeaponDTO weapon : dto.getWeapons()) {
+            CoCCharacterSheetSkillEntity used = e.getSkills().stream().filter((skill) -> skill.getSkill().getId().equals(weapon.getWeapon().getSkillUsedId())).findAny().orElse(null);
+            if (used != null && used.getValue() != null) {
+                weapon.setSuccessValue(used.getValue());
+            }
+        }
         return dto;
     }
 

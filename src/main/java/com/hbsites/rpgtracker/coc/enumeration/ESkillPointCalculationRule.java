@@ -1,5 +1,13 @@
 package com.hbsites.rpgtracker.coc.enumeration;
 
+import com.hbsites.hbsitescommons.dto.LookupData;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 public enum ESkillPointCalculationRule {
 
     EDU4("EDU x 4"),
@@ -17,8 +25,14 @@ public enum ESkillPointCalculationRule {
         this.desc = desc;
     }
 
+    public static final List<ESkillPointCalculationRule> all = List.of(EDU4, EDU2_INT2, EDU2_APP2, EDU2_STR2, EDU2_DEX2, EDU2_STR_OR_DEX_2, EDU2_APP_OR_DEX_2, EDU2_STR_OR_DEX_OR_APP_2);
+
     @Override
     public String toString() {
         return this.desc;
+    }
+
+    public static Page<LookupData> toLookupData() {
+        return new PageImpl<>(all.stream().map(e -> new LookupData(e.name(), e.toString())).collect(Collectors.toList()), PageRequest.of(0, 20), all.size());
     }
 }

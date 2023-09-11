@@ -6,6 +6,7 @@ import com.hbsites.rpgtracker.coc.dto.CoCAmmoDTO;
 import com.hbsites.rpgtracker.coc.service.CoCAmmoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,8 +23,8 @@ public class CoCAmmoRestController implements CRUDRestController<CoCAmmoDTO, CoC
     private CoCAmmoService service;
 
     @Override
-    public List<CoCAmmoDTO> getAll() {
-        return service.getAll();
+    public Page<CoCAmmoDTO> getAll(int page) {
+        return service.getAll(page);
     }
 
     @Override

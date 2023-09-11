@@ -9,6 +9,9 @@ import com.hbsites.rpgtracker.coc.repository.CoCSessionRepository;
 import org.apache.commons.lang3.NotImplementedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -29,8 +32,15 @@ public class CoCSessionService implements CRUDService<UUID, CoCSessionDTO, CoCSe
     private SessionBasicInfoRequestProducer sessionBasicInfoRequestProducer;
 
     @Override
-    public List<CoCSessionDTO> getAll() {
-        return repository.findAll().stream().map(e -> e.toListDTO(sessionBasicInfoRequestProducer)).collect(Collectors.toList());
+    public Page<CoCSessionDTO> getAll(int page) {
+        PageRequest pageRequest = PageRequest.of(
+                page,
+                20);
+        return new PageImpl<>(
+                repository.findAll().stream().map(e -> e.toListDTO(sessionBasicInfoRequestProducer))
+                        .collect(Collectors.toList()),
+                pageRequest, 20
+        );
     }
 
     @Override

@@ -10,6 +10,10 @@ import com.hbsites.rpgtracker.coc.repository.CoCSkillRepository;
 import com.hbsites.rpgtracker.coc.repository.CoCWeaponRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -19,7 +23,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
-public class CoCSkillService implements CRUDService<UUID, CoCSkillDTO, CoCSkillCreateDTO, CoCSkillDetailDTO> {
+public class CoCSkillService implements CRUDService<UUID, CoCSkillDTO, CoCSkillDetailDTO, CoCSkillDetailDTO> {
 
     @Lazy
     @Autowired
@@ -34,13 +38,16 @@ public class CoCSkillService implements CRUDService<UUID, CoCSkillDTO, CoCSkillC
     private CoCWeaponRepository weaponRepository;
 
     @Override
-    public List<CoCSkillDTO> getAll() {
-        return repository.findAll().stream().map(CoCSkillEntity::toListDTO)
-                .collect(Collectors.toList());
+    public Page<CoCSkillDTO> getAll(int page) {
+        PageRequest pageRequest = PageRequest.of(
+                page,
+                20,
+                Sort.by("name"));
+        return repository.findAll(pageRequest).map(CoCSkillEntity::toListDTO);
     }
 
     @Override
-    public CoCSkillDetailDTO create(CoCSkillCreateDTO coCSkillDTO) {
+    public CoCSkillDetailDTO create(CoCSkillDetailDTO coCSkillDTO) {
         CoCSkillEntity e = new CoCSkillEntity();
         e.setName(coCSkillDTO.getName());
         e.setKind(coCSkillDTO.getKind());
@@ -71,7 +78,7 @@ public class CoCSkillService implements CRUDService<UUID, CoCSkillDTO, CoCSkillC
     }
 
     @Override
-    public CoCSkillDetailDTO update(UUID id, CoCSkillCreateDTO payload) {
+    public CoCSkillDetailDTO update(UUID id, CoCSkillDetailDTO payload) {
         CoCSkillEntity e = findEntityOrElseThrow(id);
         e.setName(payload.getName());
         e.setRarity(payload.getRarity());

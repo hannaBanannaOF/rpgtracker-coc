@@ -6,6 +6,7 @@ import com.hbsites.rpgtracker.coc.dto.CoCPulpTalentDTO;
 import com.hbsites.rpgtracker.coc.service.CoCPulpTalentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,8 +23,8 @@ public class CoCPulpTalentRestController implements CRUDRestController<CoCPulpTa
     private CoCPulpTalentService pulpTalentService;
 
     @Override
-    public List<CoCPulpTalentDTO> getAll() {
-        return pulpTalentService.getAll();
+    public Page<CoCPulpTalentDTO> getAll(int page) {
+        return pulpTalentService.getAll(page);
     }
 
     @Override

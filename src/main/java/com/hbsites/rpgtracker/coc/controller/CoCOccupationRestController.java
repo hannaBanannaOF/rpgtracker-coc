@@ -8,6 +8,7 @@ import com.hbsites.rpgtracker.coc.dto.CoCOccupationListingDTO;
 import com.hbsites.rpgtracker.coc.service.CoCOccupationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,19 +18,19 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/occupations")
 @ApiVersion(1)
-public class CoCOccupationRestController implements CRUDRestController<CoCOccupationListingDTO , CoCOccupationDetailDTO, UUID, CoCOccupationCreateDTO> {
+public class CoCOccupationRestController implements CRUDRestController<CoCOccupationListingDTO , CoCOccupationDetailDTO, UUID, CoCOccupationDetailDTO> {
 
     @Autowired
     @Lazy
     private CoCOccupationService occupationService;
 
     @Override
-    public List<CoCOccupationListingDTO> getAll() {
-        return occupationService.getAll();
+    public Page<CoCOccupationListingDTO> getAll(int page) {
+        return occupationService.getAll(page);
     }
 
     @Override
-    public CoCOccupationDetailDTO create(CoCOccupationCreateDTO payload) {
+    public CoCOccupationDetailDTO create(CoCOccupationDetailDTO payload) {
         return occupationService.create(payload);
     }
 
@@ -39,7 +40,7 @@ public class CoCOccupationRestController implements CRUDRestController<CoCOccupa
     }
 
     @Override
-    public CoCOccupationDetailDTO update(UUID uuid, CoCOccupationCreateDTO dto) {
+    public CoCOccupationDetailDTO update(UUID uuid, CoCOccupationDetailDTO dto) {
         return occupationService.update(uuid, dto);
     }
 

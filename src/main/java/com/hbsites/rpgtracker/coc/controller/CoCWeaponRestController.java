@@ -8,6 +8,7 @@ import com.hbsites.rpgtracker.coc.dto.CoCWeaponListDTO;
 import com.hbsites.rpgtracker.coc.service.CoCWeaponService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,19 +18,19 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/weapons")
 @ApiVersion(1)
-public class CoCWeaponRestController implements CRUDRestController<CoCWeaponListDTO, CoCWeaponDetailDTO, UUID, CoCWeaponCreateDTO> {
+public class CoCWeaponRestController implements CRUDRestController<CoCWeaponListDTO, CoCWeaponDetailDTO, UUID, CoCWeaponDetailDTO> {
 
     @Lazy
     @Autowired
     private CoCWeaponService service;
 
     @Override
-    public List<CoCWeaponListDTO> getAll() {
-        return service.getAll();
+    public Page<CoCWeaponListDTO> getAll(int page) {
+        return service.getAll(page);
     }
 
     @Override
-    public CoCWeaponDetailDTO create(CoCWeaponCreateDTO dto) {
+    public CoCWeaponDetailDTO create(CoCWeaponDetailDTO dto) {
         return service.create(dto);
     }
 
@@ -39,7 +40,7 @@ public class CoCWeaponRestController implements CRUDRestController<CoCWeaponList
     }
 
     @Override
-    public CoCWeaponDetailDTO update(UUID uuid, CoCWeaponCreateDTO dto) {
+    public CoCWeaponDetailDTO update(UUID uuid, CoCWeaponDetailDTO dto) {
         return service.update(uuid, dto);
     }
 

@@ -7,11 +7,14 @@ import com.hbsites.rpgtracker.coc.repository.CoCAmmoRepository;
 import com.hbsites.rpgtracker.coc.repository.CoCWeaponRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -27,9 +30,12 @@ public class CoCAmmoService implements CRUDService<UUID, CoCAmmoDTO, CoCAmmoDTO,
     private CoCWeaponRepository weaponRepository;
 
     @Override
-    public List<CoCAmmoDTO> getAll() {
-        return repository.findAll().stream().map(CoCAmmoEntity::toListDTO)
-                .collect(Collectors.toList());
+    public Page<CoCAmmoDTO> getAll(int page) {
+        PageRequest pageRequest = PageRequest.of(
+                page,
+                20,
+                Sort.by("name"));
+        return repository.findAll(pageRequest).map(CoCAmmoEntity::toListDTO);
     }
 
     @Override

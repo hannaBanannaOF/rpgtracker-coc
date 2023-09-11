@@ -21,6 +21,7 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Data
 @Table(name = "occupation")
@@ -77,7 +78,7 @@ public class CoCOccupationEntity extends BaseEntity<CoCOccupationListingDTO, CoC
         return new CoCOccupationDetailDTO(this.id, this.name, this.description,
                 this.skillPointCalculationRule, this.minimumCreditRating, this.maximumCreditRating, this.suggestedContacts,
                 this.epochPersonalSkillChoices, this.typedSkillChoices, this.typedSkillChoicesKind,
-                this.getSkills().stream().map(CoCSkillEntity::toListDTO).toList()
+                this.getSkills().stream().map(CoCSkillEntity::getId).collect(Collectors.toList())
         );
     }
 }

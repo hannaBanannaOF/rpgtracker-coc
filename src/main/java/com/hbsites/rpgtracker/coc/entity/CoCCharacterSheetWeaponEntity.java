@@ -46,7 +46,8 @@ public class CoCCharacterSheetWeaponEntity extends BaseEntity<CoCCharacterSheetW
                 this.getRoundsLeft(), this.getQuantityCarry(), this.getNickname(),
                 this.getWeapon().getIsMelee() || this.getWeapon().getIsThrowable() ?
                         null :
-                        this.getWeapon().getAmmo().getRoundsShotWithEach() * (this.getAmmoLeft() != null ? this.getAmmoLeft() : 0));
+                        this.getWeapon().getAmmo().getRoundsShotWithEach() * (this.getAmmoLeft() != null ? this.getAmmoLeft() : 0),
+                this.getWeapon().getSkillUsed().getAbsoluteValue());
     }
 
     @Override
@@ -55,6 +56,7 @@ public class CoCCharacterSheetWeaponEntity extends BaseEntity<CoCCharacterSheetW
                 this.getRoundsLeft(), this.getQuantityCarry(), this.getNickname(),
                 this.getWeapon().getIsMelee() || this.getWeapon().getIsThrowable() ?
                         null :
-                        this.getWeapon().getAmmo().getRoundsShotWithEach() * (this.getAmmoLeft() != null ? this.getAmmoLeft() : 0));
+                        this.getWeapon().getAmmo().getRoundsShotWithEach() * (this.getAmmoLeft() != null ? this.getAmmoLeft() : 0),
+                this.getWeapon().getSkillUsed().getAbsoluteValue());
     }
 }

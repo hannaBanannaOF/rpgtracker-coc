@@ -2,11 +2,13 @@ package com.hbsites.rpgtracker.coc.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class CoCWeaponDetailDTO {
 
     private UUID id;
@@ -18,6 +20,6 @@ public class CoCWeaponDetailDTO {
     private Boolean isMelee;
     private Boolean isThrowable;
     private Boolean isDualWield;
-    private CoCAmmoDTO ammo;
-    private CoCSkillDetailDTO skillUsed;
+    private UUID ammoId;
+    private UUID skillUsedId;
 }
