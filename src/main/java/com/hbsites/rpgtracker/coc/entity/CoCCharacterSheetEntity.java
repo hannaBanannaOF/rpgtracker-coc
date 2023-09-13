@@ -190,7 +190,11 @@ public class CoCCharacterSheetEntity extends RabbitBaseEntity<CharacterSheetList
 
     @Override
     public CoCCharacterSheetDTO toDetailDTO(EventProducerInterface template) {
-        template.getFromRabbitMQ(List.of(getCoreCharacterSheetId()), null, this.getId());
+        try {
+            template.getFromRabbitMQ(List.of(getCoreCharacterSheetId()), null, this.getId());
+        } catch(Exception e) {
+            //ignore it
+        }
         return toDetailDTO();
     }
 }

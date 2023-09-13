@@ -13,4 +13,6 @@ import java.util.UUID;
 public interface CoCAmmoRepository extends JpaRepository<CoCAmmoEntity, UUID> {
 
     public Page<CoCAmmoEntity> findAllByIdOrIdNotIn(Pageable page, UUID id, List<UUID> idNotIn);
+
+    Page<CoCAmmoEntity> findAllByNameContainsIgnoreCase(String search, Pageable page);
 }

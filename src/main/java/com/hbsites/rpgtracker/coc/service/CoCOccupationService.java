@@ -1,7 +1,6 @@
 package com.hbsites.rpgtracker.coc.service;
 
 import com.hbsites.hbsitescommons.interfaces.CRUDService;
-import com.hbsites.rpgtracker.coc.dto.CoCOccupationCreateDTO;
 import com.hbsites.rpgtracker.coc.dto.CoCOccupationDetailDTO;
 import com.hbsites.rpgtracker.coc.dto.CoCOccupationListingDTO;
 import com.hbsites.rpgtracker.coc.entity.CoCOccupationEntity;
@@ -11,14 +10,12 @@ import com.hbsites.rpgtracker.coc.repository.CoCSkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class CoCOccupationService implements CRUDService<UUID, CoCOccupationListingDTO, CoCOccupationDetailDTO, CoCOccupationDetailDTO> {

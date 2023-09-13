@@ -1,7 +1,6 @@
 package com.hbsites.rpgtracker.coc.service;
 
 import com.hbsites.hbsitescommons.interfaces.CRUDService;
-import com.hbsites.rpgtracker.coc.dto.CoCSkillCreateDTO;
 import com.hbsites.rpgtracker.coc.dto.CoCSkillDTO;
 import com.hbsites.rpgtracker.coc.dto.CoCSkillDetailDTO;
 import com.hbsites.rpgtracker.coc.entity.CoCSkillEntity;
@@ -11,16 +10,13 @@ import com.hbsites.rpgtracker.coc.repository.CoCWeaponRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class CoCSkillService implements CRUDService<UUID, CoCSkillDTO, CoCSkillDetailDTO, CoCSkillDetailDTO> {

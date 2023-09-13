@@ -47,7 +47,11 @@ public class CoCSessionEntity extends RabbitBaseEntity<CoCSessionDTO, CoCSession
 
     @Override
     public CoCSessionDTO toDetailDTO(EventProducerInterface template) {
-        template.getFromRabbitMQ(List.of(this.getCoreSessionId()), this.getId(), null);
+        try {
+            template.getFromRabbitMQ(List.of(this.getCoreSessionId()), this.getId(), null);
+        } catch (Exception e) {
+            // ignore it
+        }
         CoCSessionDTO dto = new CoCSessionDTO(this.getPulpCthulhu(), this.getCoreSessionId());
         dto.populate(this.getId(), null, ETRPGSystem.CALL_OF_CTHULHU, false, null);
         return dto;

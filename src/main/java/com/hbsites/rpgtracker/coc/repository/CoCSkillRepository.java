@@ -15,9 +15,13 @@ public interface CoCSkillRepository extends JpaRepository<CoCSkillEntity, UUID> 
 
     Page<CoCSkillEntity> findAllByUsableTrueOrId(UUID id, Pageable page);
 
+    Page<CoCSkillEntity> findAllByUsableTrueAndNameContainsIgnoreCase(String name, Pageable page);
+
     Page<CoCSkillEntity> findAllByUsableFalse(Pageable page);
 
     Page<CoCSkillEntity> findAllByUsableFalseOrId(UUID id, Pageable page);
+
+    Page<CoCSkillEntity> findAllByUsableFalseAndNameContainsIgnoreCase(String name, Pageable page);
 
     boolean existsByParentSkillId(UUID id);
 }

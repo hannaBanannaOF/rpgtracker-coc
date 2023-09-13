@@ -2,7 +2,6 @@ package com.hbsites.rpgtracker.coc.controller;
 
 import com.hbsites.hbsitescommons.config.ApiVersion;
 import com.hbsites.hbsitescommons.interfaces.CRUDRestController;
-import com.hbsites.rpgtracker.coc.dto.CoCOccupationCreateDTO;
 import com.hbsites.rpgtracker.coc.dto.CoCOccupationDetailDTO;
 import com.hbsites.rpgtracker.coc.dto.CoCOccupationListingDTO;
 import com.hbsites.rpgtracker.coc.service.CoCOccupationService;
@@ -12,7 +11,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController

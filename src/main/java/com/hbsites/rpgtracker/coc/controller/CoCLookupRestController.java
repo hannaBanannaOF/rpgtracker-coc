@@ -2,7 +2,7 @@ package com.hbsites.rpgtracker.coc.controller;
 
 import com.hbsites.hbsitescommons.config.ApiVersion;
 import com.hbsites.hbsitescommons.dto.LookupData;
-import com.hbsites.rpgtracker.coc.dto.LookupService;
+import com.hbsites.rpgtracker.coc.service.LookupService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +19,11 @@ public class CoCLookupRestController {
     private LookupService lookupService;
 
     @GetMapping
-    public Page<LookupData> getLookupData(@RequestParam LookupService.LookupClass lookupClass, @RequestParam String initialValue) {
-        return lookupService.getLookupData(lookupClass, initialValue);
+    public Page<LookupData> getLookupData(
+            @RequestParam LookupService.LookupClass lookupClass,
+            @RequestParam(required = false) String initialValue,
+            @RequestParam(required = false) String search
+    ) {
+        return lookupService.getLookupData(lookupClass, initialValue, search);
     }
 }

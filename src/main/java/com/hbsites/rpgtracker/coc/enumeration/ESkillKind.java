@@ -27,7 +27,11 @@ public enum ESkillKind {
 
     public static final List<ESkillKind> all = List.of(INTERPERSONAL, COMBAT, COMMON, INVESTIGATION);
 
-    public static Page<LookupData> toLookupData() {
-        return new PageImpl<>(all.stream().map(e -> new LookupData(e.name(), e.toString())).collect(Collectors.toList()), PageRequest.of(0, 20), all.size());
+    public static Page<LookupData> toLookupData(String search) {
+        List<ESkillKind> filtered = all;
+        if (search != null && !search.isBlank()) {
+            filtered = all.stream().filter(e -> e.desc.toUpperCase().contains(search.toUpperCase())).collect(Collectors.toList());
+        }
+        return new PageImpl<>(filtered.stream().map(e -> new LookupData(e.name(), e.toString())).collect(Collectors.toList()), PageRequest.of(0, 20), all.size());
     }
 }
