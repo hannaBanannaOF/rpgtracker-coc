@@ -1,0 +1,13 @@
+package com.hbsites.rpgtracker.coc.repository;
+
+import com.hbsites.rpgtracker.coc.entity.OccupationEntity;
+import com.hbsites.rpgtracker.coc.entity.SkillEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.UUID;
+
+@Repository
+public interface OccupationRepository extends JpaRepository<OccupationEntity, UUID> {
+    boolean existsBySkills(SkillEntity e);
+}

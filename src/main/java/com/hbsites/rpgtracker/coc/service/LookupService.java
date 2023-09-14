@@ -1,13 +1,13 @@
 package com.hbsites.rpgtracker.coc.service;
 
 import com.hbsites.hbsitescommons.dto.LookupData;
-import com.hbsites.rpgtracker.coc.entity.CoCAmmoEntity;
-import com.hbsites.rpgtracker.coc.entity.CoCSkillEntity;
+import com.hbsites.rpgtracker.coc.entity.AmmoEntity;
+import com.hbsites.rpgtracker.coc.entity.SkillEntity;
 import com.hbsites.rpgtracker.coc.enumeration.ESkillKind;
 import com.hbsites.rpgtracker.coc.enumeration.ESkillPointCalculationRule;
 import com.hbsites.rpgtracker.coc.enumeration.ESkillRarity;
-import com.hbsites.rpgtracker.coc.repository.CoCAmmoRepository;
-import com.hbsites.rpgtracker.coc.repository.CoCSkillRepository;
+import com.hbsites.rpgtracker.coc.repository.AmmoRepository;
+import com.hbsites.rpgtracker.coc.repository.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
@@ -24,11 +24,11 @@ public class LookupService {
 
     @Autowired
     @Lazy
-    private CoCSkillRepository skillRepository;
+    private SkillRepository skillRepository;
 
     @Autowired
     @Lazy
-    private CoCAmmoRepository ammoRepository;
+    private AmmoRepository ammoRepository;
 
     public Page<LookupData> getLookupData(LookupClass lookupEntity, String initialValue, String search) {
         return switch(lookupEntity) {
@@ -47,7 +47,7 @@ public class LookupService {
                 0, 20,  Sort.by("name")
         );
 
-        Page<CoCSkillEntity> data;
+        Page<SkillEntity> data;
         if (search != null && !search.isBlank()) {
             data = skillRepository.findAllByUsableTrueAndNameContainsIgnoreCase(search, page);
         } else if (initialValue != null && !initialValue.isBlank()) {
@@ -63,7 +63,7 @@ public class LookupService {
                 0, 20,  Sort.by("name")
         );
 
-        Page<CoCSkillEntity> data;
+        Page<SkillEntity> data;
         if (search != null && !search.isBlank()) {
             data = skillRepository.findAllByUsableFalseAndNameContainsIgnoreCase(search, page);
         } else if (initialValue != null && !initialValue.isBlank()) {
@@ -80,7 +80,7 @@ public class LookupService {
                 0, 20,  Sort.by("name")
         );
 
-        Page<CoCAmmoEntity> data;
+        Page<AmmoEntity> data;
         if (search != null && !search.isBlank()) {
             data = ammoRepository.findAllByNameContainsIgnoreCase(search, page);
         } else if (initialValue != null && !initialValue.isBlank()) {
