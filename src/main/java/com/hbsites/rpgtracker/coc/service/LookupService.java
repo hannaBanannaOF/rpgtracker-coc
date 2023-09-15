@@ -6,6 +6,7 @@ import com.hbsites.rpgtracker.coc.entity.SkillEntity;
 import com.hbsites.rpgtracker.coc.enumeration.ESkillKind;
 import com.hbsites.rpgtracker.coc.enumeration.ESkillPointCalculationRule;
 import com.hbsites.rpgtracker.coc.enumeration.ESkillRarity;
+import com.hbsites.rpgtracker.coc.enumeration.ESpellCategory;
 import com.hbsites.rpgtracker.coc.repository.AmmoRepository;
 import com.hbsites.rpgtracker.coc.repository.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,7 @@ public class LookupService {
             case skillRarity -> ESkillRarity.toLookupData(search);
             case skillPointCalculationRule -> ESkillPointCalculationRule.toLookupData(search);
             case ammo -> getAmmo(initialValue, search);
+            case spellCategory -> ESpellCategory.toLookupData(search);
             default -> Page.empty();
         };
     }
@@ -93,6 +95,6 @@ public class LookupService {
     }
 
     public enum LookupClass {
-        notUsableSkill, skillRarity, skillKind, usableSkill, ammo, skillPointCalculationRule
+        notUsableSkill, skillRarity, skillKind, usableSkill, ammo, skillPointCalculationRule, spellCategory
     }
 }

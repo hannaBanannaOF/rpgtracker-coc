@@ -1,5 +1,6 @@
 package com.hbsites.rpgtracker.coc.dto;
 
+import com.hbsites.hbsitescommons.dto.LookupData;
 import com.hbsites.rpgtracker.coc.enumeration.ESkillKind;
 import com.hbsites.rpgtracker.coc.enumeration.ESkillPointCalculationRule;
 import lombok.AllArgsConstructor;
@@ -23,5 +24,12 @@ public class OccupationDetailDTO {
     private Integer epochPersonalSkillChoices;
     private Integer typedSkillChoices;
     private ESkillKind typedSkillChoicesKind;
-    private List<UUID> skills;
+    private List<OccupationSkills> skills;
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class OccupationSkills {
+        private UUID skillId;
+    }
 }

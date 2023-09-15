@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    hikari:
+      connectionTimeout: "20000"
+      maximumPoolSize: "5"
+    url: "jdbc:postgresql://localhost:5432/rpgtracker-coc?currentSchema=public"
+    username: "postgres"
+    password: "postgres"
+    driver-class-name: "org.postgresql.Driver"
+  liquibase:
+    change-log: "classpath:db/master-coc.json"
+  jpa:
+    show-sql: "true"
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: "http://localhost:8083/realms/HBsites/protocol/openid-connect/certs"
+  rabbitmq:
+    host: "localhost"
+    port: "5672"
+    username: "rpgtracker-coc"
+    password: "rpgtracker-coc"
+server:
+  port: "8082"

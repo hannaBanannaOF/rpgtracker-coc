@@ -1,9 +1,11 @@
 package com.hbsites.rpgtracker.coc.dto;
 
+import com.hbsites.rpgtracker.coc.enumeration.ESpellCategory;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -18,4 +20,13 @@ public class SpellDetailDTO {
     private String description;
     private String visceralForm;
     private String alternativeNames;
+    private List<CategoryDTO> categories;
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class CategoryDTO {
+        private UUID id;
+        private ESpellCategory category;
+    }
 }

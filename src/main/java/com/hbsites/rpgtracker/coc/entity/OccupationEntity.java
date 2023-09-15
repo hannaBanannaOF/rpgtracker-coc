@@ -1,5 +1,6 @@
 package com.hbsites.rpgtracker.coc.entity;
 
+import com.hbsites.hbsitescommons.dto.LookupData;
 import com.hbsites.hbsitescommons.entity.BaseEntity;
 import com.hbsites.rpgtracker.coc.dto.OccupationDetailDTO;
 import com.hbsites.rpgtracker.coc.dto.OccupationListingDTO;
@@ -78,7 +79,7 @@ public class OccupationEntity extends BaseEntity<OccupationListingDTO, Occupatio
         return new OccupationDetailDTO(this.id, this.name, this.description,
                 this.skillPointCalculationRule, this.minimumCreditRating, this.maximumCreditRating, this.suggestedContacts,
                 this.epochPersonalSkillChoices, this.typedSkillChoices, this.typedSkillChoicesKind,
-                this.getSkills().stream().map(SkillEntity::getId).collect(Collectors.toList())
+                this.getSkills().stream().map(e -> new OccupationDetailDTO.OccupationSkills(e.getId())).collect(Collectors.toList())
         );
     }
 }

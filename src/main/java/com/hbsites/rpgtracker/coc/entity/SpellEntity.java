@@ -16,6 +16,7 @@ import lombok.Data;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Data
 @Entity
@@ -69,6 +70,7 @@ public class SpellEntity extends BaseEntity<SpellListingDTO, SpellDetailDTO> {
     public SpellDetailDTO toDetailDTO() {
         return new SpellDetailDTO(this.getId(), this.getName(),
                 this.getMonsterKnowledge(), this.getCost(), this.getConjuringTime(),
-                this.getDescription(), this.getVisceralForm(), this.getAlternativeNames());
+                this.getDescription(), this.getVisceralForm(), this.getAlternativeNames(),
+                this.getCategories().stream().map(e -> new SpellDetailDTO.CategoryDTO(e.getId(), e.getCategory())).collect(Collectors.toList()));
     }
 }
