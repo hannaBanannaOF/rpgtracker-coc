@@ -1,6 +1,6 @@
 package com.hbsites.rpgtracker.coc.entity;
 
-import com.hbsites.hbsitescommons.entity.BaseEntity;
+import com.hbsites.hbsitescommons.commons.entity.BaseEntity;
 import com.hbsites.rpgtracker.coc.dto.CharacterSheetSkillDTO;
 import com.hbsites.rpgtracker.coc.entity.ids.SkillCharacterSheetID;
 import jakarta.persistence.Column;

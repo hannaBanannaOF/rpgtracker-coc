@@ -1,6 +1,6 @@
 package com.hbsites.rpgtracker.coc.service;
 
-import com.hbsites.hbsitescommons.interfaces.CRUDService;
+import com.hbsites.hbsitescommons.commons.interfaces.CRUDService;
 import com.hbsites.rpgtracker.coc.dto.PulpTalentDTO;
 import com.hbsites.rpgtracker.coc.entity.PulpTalentEntity;
 import com.hbsites.rpgtracker.coc.repository.PulpTalentRepository;

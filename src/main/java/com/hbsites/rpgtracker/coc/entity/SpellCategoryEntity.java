@@ -1,6 +1,6 @@
 package com.hbsites.rpgtracker.coc.entity;
 
-import com.hbsites.hbsitescommons.entity.BaseEntity;
+import com.hbsites.hbsitescommons.commons.entity.BaseEntity;
 import com.hbsites.rpgtracker.coc.enumeration.ESpellCategory;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

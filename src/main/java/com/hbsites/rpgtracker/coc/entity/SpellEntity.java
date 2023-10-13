@@ -1,10 +1,9 @@
 package com.hbsites.rpgtracker.coc.entity;
 
-import com.hbsites.hbsitescommons.entity.BaseEntity;
+import com.hbsites.hbsitescommons.commons.entity.BaseEntity;
 import com.hbsites.rpgtracker.coc.dto.SpellDetailDTO;
 import com.hbsites.rpgtracker.coc.dto.SpellListingDTO;
 import com.hbsites.rpgtracker.coc.enumeration.ESpellCategory;
-import com.hbsites.rpgtracker.core.entity.CharacterSheetEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -52,6 +51,9 @@ public class SpellEntity extends BaseEntity<SpellListingDTO, SpellDetailDTO> {
     @OneToMany(mappedBy = "spell", fetch = FetchType.LAZY, targetEntity = SpellCategoryEntity.class)
     private List<SpellCategoryEntity> categories;
 
+    @Column(name = "creator_id", columnDefinition = "uuid")
+    private UUID creatorId;
+
     public boolean isOnlyOniricLandscape() {
         return this.categories.stream().anyMatch(e -> ESpellCategory.ONIRIC_LANDSCAPE.equals(e.getCategory()));
     }
@@ -68,9 +70,11 @@ public class SpellEntity extends BaseEntity<SpellListingDTO, SpellDetailDTO> {
 
     @Override
     public SpellDetailDTO toDetailDTO() {
-        return new SpellDetailDTO(this.getId(), this.getName(),
+        SpellDetailDTO dto = new SpellDetailDTO(this.getId(), this.getName(),
                 this.getMonsterKnowledge(), this.getCost(), this.getConjuringTime(),
                 this.getDescription(), this.getVisceralForm(), this.getAlternativeNames(),
                 this.getCategories().stream().map(e -> new SpellDetailDTO.CategoryDTO(e.getId(), e.getCategory())).collect(Collectors.toList()));
+        dto.setCreatorId(this.getCreatorId());
+        return dto;
     }
 }

@@ -1,7 +1,7 @@
 package com.hbsites.rpgtracker.coc.controller;
 
-import com.hbsites.hbsitescommons.config.ApiVersion;
-import com.hbsites.hbsitescommons.interfaces.CRUDRestController;
+import com.hbsites.hbsitescommons.commons.config.ApiVersion;
+import com.hbsites.hbsitescommons.commons.interfaces.CRUDRestController;
 import com.hbsites.rpgtracker.coc.dto.SessionDTO;
 import com.hbsites.rpgtracker.coc.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;

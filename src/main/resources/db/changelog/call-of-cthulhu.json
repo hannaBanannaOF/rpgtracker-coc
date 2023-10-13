@@ -29,7 +29,7 @@
                       "primaryKey": true,
                       "nullable": false
                     },
-                    "defaultValueComputed": "gen_random_uuid()"
+                    "defaultValueComputed": "${uuid_function.value}"
                   }
                 },
                 {
@@ -105,7 +105,7 @@
                       "primaryKey": true,
                       "nullable": false
                     },
-                    "defaultValueComputed": "gen_random_uuid()"
+                    "defaultValueComputed": "${uuid_function.value}"
                   }
                 },
                 {
@@ -182,7 +182,7 @@
                       "primaryKey": true,
                       "nullable": false
                     },
-                    "defaultValueComputed": "gen_random_uuid()"
+                    "defaultValueComputed": "${uuid_function.value}"
                   }
                 },
                 {
@@ -309,7 +309,7 @@
                       "primaryKey": true,
                       "nullable": false
                     },
-                    "defaultValueComputed": "gen_random_uuid()"
+                    "defaultValueComputed": "${uuid_function.value}"
                   }
                 },
                 {
@@ -704,7 +704,7 @@
                       "primaryKey": true,
                       "nullable": false
                     },
-                    "defaultValueComputed": "gen_random_uuid()"
+                    "defaultValueComputed": "${uuid_function.value}"
                   }
                 },
                 {
@@ -977,7 +977,7 @@
                       "primaryKey": true,
                       "nullable": false
                     },
-                    "defaultValueComputed": "gen_random_uuid()"
+                    "defaultValueComputed": "${uuid_function.value}"
                   }
                 },
                 {
@@ -1064,7 +1064,7 @@
                       "primaryKey": true,
                       "nullable": false
                     },
-                    "defaultValueComputed": "gen_random_uuid()"
+                    "defaultValueComputed": "${uuid_function.value}"
                   }
                 },
                 {
@@ -1420,7 +1420,7 @@
                       "primaryKey": true,
                       "nullable": false
                     },
-                    "defaultValueComputed": "gen_random_uuid()"
+                    "defaultValueComputed": "${uuid_function.value}"
                   }
                 },
                 {
@@ -1537,7 +1537,7 @@
                       "primaryKey": true,
                       "nullable": false
                     },
-                    "defaultValueComputed": "gen_random_uuid()"
+                    "defaultValueComputed": "${uuid_function.value}"
                   }
                 },
                 {
@@ -1665,6 +1665,137 @@
                       "nullable": false
                     },
                     "defaultValueDate": "current_timestamp"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "changeSet" : {
+        "preConditions": [
+          {
+            "onFail": "MARK_RAN"
+          },
+          {
+            "not": [
+              {
+                "columnExists": {
+                  "tableName": "ammo",
+                  "columnName": "creator_id"
+                }
+              },
+              {
+                "columnExists": {
+                  "tableName": "occupation",
+                  "columnName": "creator_id"
+                }
+              },
+              {
+                "columnExists": {
+                  "tableName": "pulp_talents",
+                  "columnName": "creator_id"
+                }
+              },
+              {
+                "columnExists": {
+                  "tableName": "skills",
+                  "columnName": "creator_id"
+                }
+              },
+              {
+                "columnExists": {
+                  "tableName": "spells",
+                  "columnName": "creator_id"
+                }
+              },
+              {
+                "columnExists": {
+                  "tableName": "weapon",
+                  "columnName": "creator_id"
+                }
+              }
+            ]
+          }
+        ],
+        "id": "202312111436",
+        "author": "HannaBananna",
+        "changes": [
+          {
+            "addColumn": {
+              "tableName": "ammo",
+              "column": [
+                {
+                  "column": {
+                    "name": "creator_id",
+                    "type": "uuid"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "addColumn": {
+              "tableName": "occupation",
+              "column": [
+                {
+                  "column": {
+                    "name": "creator_id",
+                    "type": "uuid"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "addColumn": {
+              "tableName": "pulp_talents",
+              "column": [
+                {
+                  "column": {
+                    "name": "creator_id",
+                    "type": "uuid"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "addColumn": {
+              "tableName": "skills",
+              "column": [
+                {
+                  "column": {
+                    "name": "creator_id",
+                    "type": "uuid"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "addColumn": {
+              "tableName": "spells",
+              "column": [
+                {
+                  "column": {
+                    "name": "creator_id",
+                    "type": "uuid"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "addColumn": {
+              "tableName": "weapon",
+              "column": [
+                {
+                  "column": {
+                    "name": "creator_id",
+                    "type": "uuid"
                   }
                 }
               ]

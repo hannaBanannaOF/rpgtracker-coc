@@ -1,6 +1,6 @@
 package com.hbsites.rpgtracker.coc.entity;
 
-import com.hbsites.hbsitescommons.entity.BaseEntity;
+import com.hbsites.hbsitescommons.commons.entity.BaseEntity;
 import com.hbsites.rpgtracker.coc.dto.PulpTalentDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,6 +26,9 @@ public class PulpTalentEntity extends BaseEntity<PulpTalentDTO, PulpTalentDTO> {
     @Column(name = "description", nullable = false, columnDefinition = "text")
     private String description;
 
+    @Column(name = "creator_id", columnDefinition = "uuid")
+    private UUID creatorId;
+
     @Override
     public PulpTalentDTO toListDTO() {
         return new PulpTalentDTO(this.id, this.name, this.description);
@@ -33,6 +36,8 @@ public class PulpTalentEntity extends BaseEntity<PulpTalentDTO, PulpTalentDTO> {
 
     @Override
     public PulpTalentDTO toDetailDTO() {
-        return new PulpTalentDTO(this.id, this.name, this.description);
+        PulpTalentDTO dto = new PulpTalentDTO(this.id, this.name, this.description);
+        dto.setCreatorId(this.getCreatorId());
+        return dto;
     }
 }

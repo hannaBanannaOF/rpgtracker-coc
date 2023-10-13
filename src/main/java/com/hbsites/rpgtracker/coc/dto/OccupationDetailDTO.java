@@ -1,6 +1,7 @@
 package com.hbsites.rpgtracker.coc.dto;
 
-import com.hbsites.hbsitescommons.dto.LookupData;
+import com.hbsites.hbsitescommons.commons.dto.EditableResource;
+import com.hbsites.hbsitescommons.commons.dto.LookupData;
 import com.hbsites.rpgtracker.coc.enumeration.ESkillKind;
 import com.hbsites.rpgtracker.coc.enumeration.ESkillPointCalculationRule;
 import lombok.AllArgsConstructor;
@@ -13,7 +14,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OccupationDetailDTO {
+public class OccupationDetailDTO extends EditableResource {
     private UUID id;
     private String name;
     private String description;

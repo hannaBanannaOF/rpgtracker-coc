@@ -1,7 +1,7 @@
 package com.hbsites.rpgtracker.coc.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.hbsites.hbsitescommons.dto.SessionListingDTO;
+import com.hbsites.hbsitescommons.rpgtracker.dto.SessionListingDTO;
 import com.hbsites.rpgtracker.coc.entity.SessionEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;

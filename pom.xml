@@ -38,13 +38,16 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-websocket</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -75,7 +78,18 @@
             <artifactId>core-service</artifactId>
             <version>1.0.0</version>
             <scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>com.hbsites</groupId>
+					<artifactId>hbsites-commons</artifactId>
+				</exclusion>
+			</exclusions>
         </dependency>
+		<dependency>
+			<groupId>com.hbsites</groupId>
+			<artifactId>hbsites-commons</artifactId>
+			<version>1.2.2</version>
+		</dependency>
     </dependencies>
 
 	<build>

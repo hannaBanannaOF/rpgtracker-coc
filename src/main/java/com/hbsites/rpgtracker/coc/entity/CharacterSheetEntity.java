@@ -1,8 +1,8 @@
 package com.hbsites.rpgtracker.coc.entity;
 
-import com.hbsites.hbsitescommons.dto.CharacterSheetListingDTO;
-import com.hbsites.hbsitescommons.entity.RabbitBaseEntity;
-import com.hbsites.hbsitescommons.interfaces.EventProducerInterface;
+import com.hbsites.hbsitescommons.rpgtracker.dto.CharacterSheetListingDTO;
+import com.hbsites.hbsitescommons.commons.entity.RabbitBaseEntity;
+import com.hbsites.hbsitescommons.commons.interfaces.EventProducerInterface;
 import com.hbsites.rpgtracker.coc.dto.CharacterSheetDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

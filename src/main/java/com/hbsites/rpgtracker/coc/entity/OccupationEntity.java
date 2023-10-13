@@ -1,7 +1,7 @@
 package com.hbsites.rpgtracker.coc.entity;
 
-import com.hbsites.hbsitescommons.dto.LookupData;
-import com.hbsites.hbsitescommons.entity.BaseEntity;
+import com.hbsites.hbsitescommons.commons.dto.LookupData;
+import com.hbsites.hbsitescommons.commons.entity.BaseEntity;
 import com.hbsites.rpgtracker.coc.dto.OccupationDetailDTO;
 import com.hbsites.rpgtracker.coc.dto.OccupationListingDTO;
 import com.hbsites.rpgtracker.coc.enumeration.ESkillKind;
@@ -69,6 +69,9 @@ public class OccupationEntity extends BaseEntity<OccupationListingDTO, Occupatio
             inverseJoinColumns = @JoinColumn(name = "skill_id", referencedColumnName = "id"))
     private List<SkillEntity> skills = new ArrayList<>();
 
+    @Column(name = "creator_id", columnDefinition = "uuid")
+    private UUID creatorId;
+
     @Override
     public OccupationListingDTO toListDTO() {
         return new OccupationListingDTO(this.getId(), this.getName(), this.getDescription());
@@ -76,10 +79,12 @@ public class OccupationEntity extends BaseEntity<OccupationListingDTO, Occupatio
 
     @Override
     public OccupationDetailDTO toDetailDTO() {
-        return new OccupationDetailDTO(this.id, this.name, this.description,
+        OccupationDetailDTO dto = new OccupationDetailDTO(this.id, this.name, this.description,
                 this.skillPointCalculationRule, this.minimumCreditRating, this.maximumCreditRating, this.suggestedContacts,
                 this.epochPersonalSkillChoices, this.typedSkillChoices, this.typedSkillChoicesKind,
                 this.getSkills().stream().map(e -> new OccupationDetailDTO.OccupationSkills(e.getId())).collect(Collectors.toList())
         );
+        dto.setCreatorId(this.getCreatorId());
+        return dto;
     }
 }

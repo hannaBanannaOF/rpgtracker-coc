@@ -1,9 +1,13 @@
 package com.hbsites.rpgtracker.coc.controller;
 
-import com.hbsites.hbsitescommons.config.ApiVersion;
-import com.hbsites.hbsitescommons.interfaces.CRUDRestController;
+import com.hbsites.hbsitescommons.commons.config.ApiVersion;
+import com.hbsites.hbsitescommons.commons.interfaces.CRUDRestController;
+import com.hbsites.rpgtracker.coc.config.aop.EditableResource;
 import com.hbsites.rpgtracker.coc.dto.WeaponDetailDTO;
 import com.hbsites.rpgtracker.coc.dto.WeaponListDTO;
+import com.hbsites.rpgtracker.coc.entity.SpellEntity;
+import com.hbsites.rpgtracker.coc.entity.WeaponEntity;
+import com.hbsites.rpgtracker.coc.service.SpellService;
 import com.hbsites.rpgtracker.coc.service.WeaponService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -38,11 +42,13 @@ public class WeaponRestController implements CRUDRestController<WeaponListDTO, W
     }
 
     @Override
+    @EditableResource(service = WeaponService.class, clazz = WeaponEntity.class)
     public WeaponDetailDTO update(UUID uuid, WeaponDetailDTO dto) {
         return service.update(uuid, dto);
     }
 
     @Override
+    @EditableResource(service = WeaponService.class, clazz = WeaponEntity.class)
     public void delete(UUID uuid) {
         service.deleteById(uuid);
     }

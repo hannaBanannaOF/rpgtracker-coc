@@ -1,6 +1,6 @@
 package com.hbsites.rpgtracker.coc.enumeration;
 
-import com.hbsites.hbsitescommons.dto.LookupData;
+import com.hbsites.hbsitescommons.commons.dto.LookupData;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;

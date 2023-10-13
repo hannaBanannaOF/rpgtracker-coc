@@ -1,6 +1,6 @@
 package com.hbsites.rpgtracker.coc.service;
 
-import com.hbsites.hbsitescommons.dto.LookupData;
+import com.hbsites.hbsitescommons.commons.dto.LookupData;
 import com.hbsites.rpgtracker.coc.entity.AmmoEntity;
 import com.hbsites.rpgtracker.coc.entity.SkillEntity;
 import com.hbsites.rpgtracker.coc.enumeration.ESkillKind;

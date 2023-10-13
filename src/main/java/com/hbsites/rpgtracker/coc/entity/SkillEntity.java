@@ -1,6 +1,6 @@
 package com.hbsites.rpgtracker.coc.entity;
 
-import com.hbsites.hbsitescommons.entity.BaseEntity;
+import com.hbsites.hbsitescommons.commons.entity.BaseEntity;
 import com.hbsites.rpgtracker.coc.dto.SkillDTO;
 import com.hbsites.rpgtracker.coc.dto.SkillDetailDTO;
 import com.hbsites.rpgtracker.coc.enumeration.ESkillKind;
@@ -52,6 +52,9 @@ public class SkillEntity extends BaseEntity<SkillDTO, SkillDetailDTO> {
     @JoinColumn(name="parent_id")
     private SkillEntity parentSkill;
 
+    @Column(name = "creator_id", columnDefinition = "uuid")
+    private UUID creatorId;
+
     @Transient
     private Integer absoluteValue;
 
@@ -71,6 +74,8 @@ public class SkillEntity extends BaseEntity<SkillDTO, SkillDetailDTO> {
 
     @Override
     public SkillDetailDTO toDetailDTO() {
-        return new SkillDetailDTO(this.id, this.rarity, this.kind, this.usable, this.baseValue, this.name, this.parentSkill != null ? this.parentSkill.getId() : null);
+        SkillDetailDTO dto = new SkillDetailDTO(this.id, this.rarity, this.kind, this.usable, this.baseValue, this.name, this.parentSkill != null ? this.parentSkill.getId() : null);
+        dto.setCreatorId(this.getCreatorId());
+        return dto;
     }
 }

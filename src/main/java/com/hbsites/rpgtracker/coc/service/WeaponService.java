@@ -1,6 +1,6 @@
 package com.hbsites.rpgtracker.coc.service;
 
-import com.hbsites.hbsitescommons.interfaces.CRUDService;
+import com.hbsites.hbsitescommons.commons.interfaces.CRUDService;
 import com.hbsites.rpgtracker.coc.dto.WeaponDetailDTO;
 import com.hbsites.rpgtracker.coc.dto.WeaponListDTO;
 import com.hbsites.rpgtracker.coc.entity.WeaponEntity;

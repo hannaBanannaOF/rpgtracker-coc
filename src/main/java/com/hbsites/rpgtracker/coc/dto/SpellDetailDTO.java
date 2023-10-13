@@ -1,5 +1,6 @@
 package com.hbsites.rpgtracker.coc.dto;
 
+import com.hbsites.hbsitescommons.commons.dto.EditableResource;
 import com.hbsites.rpgtracker.coc.enumeration.ESpellCategory;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +12,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SpellDetailDTO {
+public class SpellDetailDTO extends EditableResource {
     private UUID id;
     private String name;
     private String monsterKnowledge;

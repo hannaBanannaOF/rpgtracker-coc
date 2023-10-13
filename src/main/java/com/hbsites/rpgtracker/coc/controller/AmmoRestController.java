@@ -1,8 +1,11 @@
 package com.hbsites.rpgtracker.coc.controller;
 
-import com.hbsites.hbsitescommons.config.ApiVersion;
-import com.hbsites.hbsitescommons.interfaces.CRUDRestController;
+import com.hbsites.hbsitescommons.commons.config.ApiVersion;
+import com.hbsites.hbsitescommons.commons.interfaces.CRUDRestController;
+import com.hbsites.rpgtracker.coc.config.aop.EditableResource;
 import com.hbsites.rpgtracker.coc.dto.AmmoDTO;
+import com.hbsites.rpgtracker.coc.entity.AmmoEntity;
+import com.hbsites.rpgtracker.coc.repository.AmmoRepository;
 import com.hbsites.rpgtracker.coc.service.AmmoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -37,11 +40,13 @@ public class AmmoRestController implements CRUDRestController<AmmoDTO, AmmoDTO, 
     }
 
     @Override
+    @EditableResource(service = AmmoService.class, clazz = AmmoEntity.class)
     public AmmoDTO update(UUID uuid, AmmoDTO dto) {
         return service.update(uuid, dto);
     }
 
     @Override
+    @EditableResource(service = AmmoService.class, clazz = AmmoEntity.class)
     public void delete(UUID uuid) {
         service.deleteById(uuid);
     }

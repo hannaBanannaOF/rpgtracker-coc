@@ -1,6 +1,7 @@
 package com.hbsites.rpgtracker.coc.service;
 
-import com.hbsites.hbsitescommons.interfaces.CRUDService;
+import com.hbsites.hbsitescommons.commons.interfaces.CRUDService;
+import com.hbsites.hbsitescommons.commons.interfaces.CRUDService;
 import com.hbsites.rpgtracker.coc.dto.AmmoDTO;
 import com.hbsites.rpgtracker.coc.entity.AmmoEntity;
 import com.hbsites.rpgtracker.coc.repository.AmmoRepository;

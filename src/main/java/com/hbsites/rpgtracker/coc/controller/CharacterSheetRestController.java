@@ -1,6 +1,6 @@
 package com.hbsites.rpgtracker.coc.controller;
 
-import com.hbsites.hbsitescommons.config.ApiVersion;
+import com.hbsites.hbsitescommons.commons.config.ApiVersion;
 import com.hbsites.rpgtracker.coc.dto.CharacterSheetDTO;
 import com.hbsites.rpgtracker.coc.service.CharacterSheetService;
 import org.springframework.beans.factory.annotation.Autowired;

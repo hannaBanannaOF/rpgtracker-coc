@@ -1,9 +1,13 @@
 package com.hbsites.rpgtracker.coc.controller;
 
-import com.hbsites.hbsitescommons.config.ApiVersion;
-import com.hbsites.hbsitescommons.interfaces.CRUDRestController;
+import com.hbsites.hbsitescommons.commons.config.ApiVersion;
+import com.hbsites.hbsitescommons.commons.interfaces.CRUDRestController;
+import com.hbsites.rpgtracker.coc.config.aop.EditableResource;
 import com.hbsites.rpgtracker.coc.dto.SpellDetailDTO;
 import com.hbsites.rpgtracker.coc.dto.SpellListingDTO;
+import com.hbsites.rpgtracker.coc.entity.SkillEntity;
+import com.hbsites.rpgtracker.coc.entity.SpellEntity;
+import com.hbsites.rpgtracker.coc.service.SkillService;
 import com.hbsites.rpgtracker.coc.service.SpellService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -38,11 +42,13 @@ public class SpellRestController implements CRUDRestController<SpellListingDTO, 
     }
 
     @Override
+    @EditableResource(service = SpellService.class, clazz = SpellEntity.class)
     public SpellDetailDTO update(UUID uuid, SpellDetailDTO dto) {
         return spellService.update(uuid, dto);
     }
 
     @Override
+    @EditableResource(service = SpellService.class, clazz = SpellEntity.class)
     public void delete(UUID uuid) {
         spellService.deleteById(uuid);
     }

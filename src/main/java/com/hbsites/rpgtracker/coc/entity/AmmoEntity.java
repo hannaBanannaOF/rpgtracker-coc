@@ -1,6 +1,6 @@
 package com.hbsites.rpgtracker.coc.entity;
 
-import com.hbsites.hbsitescommons.entity.BaseEntity;
+import com.hbsites.hbsitescommons.commons.entity.BaseEntity;
 import com.hbsites.rpgtracker.coc.dto.AmmoDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,13 +27,20 @@ public class AmmoEntity extends BaseEntity<AmmoDTO, AmmoDTO> {
     @Column(name = "rounds_shot_with_each", columnDefinition = "integer", nullable = false)
     private Integer roundsShotWithEach = 1;
 
+    @Column(name = "creator_id", columnDefinition = "uuid")
+    private UUID creatorId;
+
     @Override
     public AmmoDTO toListDTO() {
-        return new AmmoDTO(this.id, this.name, this.roundsShotWithEach);
+        AmmoDTO dto = new AmmoDTO(this.id, this.name, this.roundsShotWithEach);
+        dto.setCreatorId(this.creatorId);
+        return dto;
     }
 
     @Override
     public AmmoDTO toDetailDTO() {
-        return new AmmoDTO(this.id, this.name, this.roundsShotWithEach);
+        AmmoDTO dto = new AmmoDTO(this.id, this.name, this.roundsShotWithEach);
+        dto.setCreatorId(this.creatorId);
+        return dto;
     }
 }

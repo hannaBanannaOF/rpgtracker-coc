@@ -1,6 +1,6 @@
 package com.hbsites.rpgtracker.coc.entity;
 
-import com.hbsites.hbsitescommons.entity.BaseEntity;
+import com.hbsites.hbsitescommons.commons.entity.BaseEntity;
 import com.hbsites.rpgtracker.coc.dto.WeaponDetailDTO;
 import com.hbsites.rpgtracker.coc.dto.WeaponListDTO;
 import jakarta.persistence.Column;
@@ -57,6 +57,9 @@ public class WeaponEntity extends BaseEntity<WeaponListDTO, WeaponDetailDTO> {
     @JoinColumn(name="skill_id")
     private SkillEntity skillUsed;
 
+    @Column(name = "creator_id", columnDefinition = "uuid")
+    private UUID creatorId;
+
     @Override
     public WeaponListDTO toListDTO() {
         return new WeaponListDTO(this.id, this.name, this.isMelee, this.isThrowable, this.isDualWield);
@@ -64,8 +67,10 @@ public class WeaponEntity extends BaseEntity<WeaponListDTO, WeaponDetailDTO> {
 
     @Override
     public WeaponDetailDTO toDetailDTO() {
-        return new WeaponDetailDTO(this.id, this.name, this.range, this.damage, this.attacksPerRound, this.malfunction,
+        WeaponDetailDTO dto = new WeaponDetailDTO(this.id, this.name, this.range, this.damage, this.attacksPerRound, this.malfunction,
                 this.isMelee, this.isThrowable, this.isDualWield, this.ammo != null ? this.ammo.getId() : null,
                 this.skillUsed != null ? this.skillUsed.getId() : null);
+        dto.setCreatorId(this.getCreatorId());
+        return dto;
     }
 }

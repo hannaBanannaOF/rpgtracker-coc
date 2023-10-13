@@ -1,9 +1,13 @@
 package com.hbsites.rpgtracker.coc.controller;
 
-import com.hbsites.hbsitescommons.config.ApiVersion;
-import com.hbsites.hbsitescommons.interfaces.CRUDRestController;
+import com.hbsites.hbsitescommons.commons.config.ApiVersion;
+import com.hbsites.hbsitescommons.commons.interfaces.CRUDRestController;
+import com.hbsites.rpgtracker.coc.config.aop.EditableResource;
 import com.hbsites.rpgtracker.coc.dto.OccupationDetailDTO;
 import com.hbsites.rpgtracker.coc.dto.OccupationListingDTO;
+import com.hbsites.rpgtracker.coc.entity.AmmoEntity;
+import com.hbsites.rpgtracker.coc.entity.OccupationEntity;
+import com.hbsites.rpgtracker.coc.service.AmmoService;
 import com.hbsites.rpgtracker.coc.service.OccupationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -38,11 +42,13 @@ public class OccupationRestController implements CRUDRestController<OccupationLi
     }
 
     @Override
+    @EditableResource(service = OccupationService.class, clazz = OccupationEntity.class)
     public OccupationDetailDTO update(UUID uuid, OccupationDetailDTO dto) {
         return occupationService.update(uuid, dto);
     }
 
     @Override
+    @EditableResource(service = OccupationService.class, clazz = OccupationEntity.class)
     public void delete(UUID uuid) {
         occupationService.deleteById(uuid);
     }
