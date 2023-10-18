@@ -27,6 +27,7 @@ public class ResourceServerConfig {
         http.cors(AbstractHttpConfigurer::disable).
                 authorizeHttpRequests(authz -> {
                     authz.requestMatchers("/coc/ws/**").permitAll();
+                    authz.requestMatchers("/error").permitAll();
                     authz.requestMatchers("/coc/api/**").hasRole("RPGTRACKER_USER");
                 }).
                 csrf(csrf -> csrf.ignoringRequestMatchers("coc/ws/**"))
